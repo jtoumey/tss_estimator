@@ -49,35 +49,44 @@ void classify_heartrate(int *raw_time, int *raw_hr, float *zone_array, int *zone
       // to the appropriate bin. Eventually functionalize with:
       // 
       //  sort_zone(interval_time, raw_hr[ii], zone_array);
-      if(raw_hr[ii-1] < zone_array[0])
+      if(raw_hr[ii-1] < zone_array[0] && raw_hr[ii] < zone_array[0])
       {
          zone_bin[0] = zone_bin[0] + interval_time;
       }
-      else if(raw_hr[ii-1] < zone_array[1])
+      else if(raw_hr[ii-1] < zone_array[1] && raw_hr[ii] < zone_array[1])
       {
          zone_bin[1] = zone_bin[1] + interval_time;
       }
-      else if(raw_hr[ii-1] < zone_array[2])
+      else if(raw_hr[ii-1] < zone_array[2] && raw_hr[ii] < zone_array[2])
       {
          zone_bin[2] = zone_bin[2] + interval_time;
       }
-      else if(raw_hr[ii-1] < zone_array[3])
+      else if(raw_hr[ii-1] < zone_array[3] && raw_hr[ii] < zone_array[3])
       {
          zone_bin[3] = zone_bin[3] + interval_time;
       }
-      else if(raw_hr[ii-1] < zone_array[4])
+      else if(raw_hr[ii-1] < zone_array[4] && raw_hr[ii] < zone_array[4])
       {
          zone_bin[4] = zone_bin[4] + interval_time;
       }
-      else if(raw_hr[ii-1] < zone_array[5])
+      else if(raw_hr[ii-1] < zone_array[5] && raw_hr[ii] < zone_array[5])
       {
          zone_bin[5] = zone_bin[5] + interval_time;
       }
-      else
+      else if(raw_hr[ii-1] > zone_array[5] && raw_hr[ii] > zone_array[5])
       {
          zone_bin[6] = zone_bin[6] + interval_time;
       }
-            
+      else
+      {
+         // NEED the following here:
+            //Identify which zone is split
+            //Get eq. of form HR = [(HRf - HRo)/(interval_time)]*t + to
+            //Solve for t at zone HR
+            //Add elapsed time on either side of that point to respective arrays
+         printf("Zone Stradle\n");
+      }             
+
       ii++;
       interval_time = 0; // reset 
    }
