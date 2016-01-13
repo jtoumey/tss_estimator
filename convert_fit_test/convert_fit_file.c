@@ -53,11 +53,12 @@ int convert_fit_file(char *ptr_file_name)
    {
       printf("%2d byte of the header: %u\n",ii+1,bufferArray[ii]);
    }
-   // 
 
    // Read the record header (1 byte)
    fread(&recordHeaderBuffer,1,1,ptr_myfile);
    // examine bits of this byte (jesus christ)
+   // http://stackoverflow.com/questions/1682996/bytes-to-binary-in-c
+   // 
    unsigned char mask = 1;
    unsigned char bits[8];
    for(ii = 0;ii < 8;ii++)
@@ -67,7 +68,7 @@ int convert_fit_file(char *ptr_file_name)
    // debug
    for(ii = 0;ii < 8;ii++)
    {
-      printf("bit: %d\n",bits[ii]);
+      printf("%2d bit: %d\n",ii,bits[ii]);
    }
 
    //recordHeaderMSB = recordHeaderBuffer 
